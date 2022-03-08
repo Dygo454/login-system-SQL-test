@@ -124,6 +124,17 @@ public class Main {
             }
         }
         try {
+            System.out.println("Are you a returning user (do you have a login)? (y/n)");
+            char answer = s.nextLine().charAt(0);
+            if (answer == 'n' || answer == 'N') {
+                System.out.println("Create a new account!");
+                System.out.print("Username: ");
+                String user = s.nextLine();
+                System.out.print("Password: ");
+                String pass = s.nextLine();
+                UserSchemaManager.addUser(user,pass);
+                System.out.println("Success! Now go ahead and login to your account.");
+            }
             String user = null;
             String pass;
             do {
@@ -146,7 +157,7 @@ public class Main {
                     "\n\t1) change password" +
                     "\n\t2) delete account" +
                     "\n\t3) log out" +
-                    "(0-3): ");
+                    "\n(0-3): ");
             int ind = Integer.parseInt(s.nextLine());
             if (ind == 0) {
                 try {
