@@ -11,6 +11,13 @@ public class Main {
     final static String url = "jdbc:mysql://127.0.0.1:8889/Logins";
 
     public static void main(String[] args) {
+        try {
+            SetterUpper.createDatabase();
+            SetterUpper.createTables();
+        } catch (SQLException e) {
+            System.out.println("Error initializing database/tables!");
+            System.exit(2);// 2 will be that :p
+        }
         Scanner s = new Scanner(System.in);
         System.out.print("Welcome traveler you have reached the login database!" +
                 "\nwould you like to sign in as an admin (0) or as a user (1): ");
@@ -44,13 +51,14 @@ public class Main {
                         "\n\t2) modify table" +
                         "\n\t3) delete from table" +
                         "\n\t4) e s c a p e." +
-                        "(0-4): ");
+                        "\n(0-4): ");
                 int ind = Integer.parseInt(s.nextLine());
                 if (ind == 0) {
                     try {
                         System.out.println("TABLE 1\n"+UserSchemaManager.getTable(0) + "\n\n" +
                                 "TABLE 2\n" + UserSchemaManager.getTable(1) + "\n\n" +
                                 "TABLE 3\n" + UserSchemaManager.getTable(2));
+                        System.out.println("\n");
                     } catch (SQLException e) {
                         System.out.println("Connection lost!");
                         System.exit(1);//1 will mean connection lost
